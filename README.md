@@ -1,23 +1,20 @@
 # Build LFI tools
 
-You will need to install the LFI rewriter tool, called `lfi-leg` and the post-linker called `lfi-postlink`.
+You will need to install the LFI rewriter tool, called `lfi-rewrite` and the post-linker called `lfi-postlink`.
 
 ```
-git clone https://github.com/zyedidia/lfi
-cd lfi
+git clone https://github.com/lfi-project/lfi-rewriter
+cd lfi-rewriter
 meson setup build
 cd build
 ninja
 ninja install
 ```
 
-Make sure that this tool gets installed somewhere on your `PATH`. When
+Make sure that these tools get installed somewhere on your `PATH`. When
 configuring meson you can optionally use `meson setup build --prefix=...` to
-give a custom prefix, or you can manually move `lfi-leg/lfi-leg` to your
-destination of choice after running `ninja`.
-
-The default `ninja install` will also install some other tools such as
-`lfi-run` and `lfi-verify`, as well as libraries like `liblfi`.
+give a custom prefix, or you can manually move `lfi-rewrite/lfi-rewrite` to
+your destination of choice after running `ninja`.
 
 # Build LLVM Toolchain
 
