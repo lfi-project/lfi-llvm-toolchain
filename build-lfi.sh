@@ -20,7 +20,7 @@ fi
 ./build-libcxx.sh $PREFIX
 ./build-mimalloc.sh $PREFIX
 
-cp $(which lfi-leg) $PREFIX/lfi-bin
+cp $(which lfi-rewrite) $PREFIX/lfi-bin
 cp $(which lfi-postlink) $PREFIX/lfi-bin
 cp $(which lfi-verify) $PREFIX/lfi-bin
 
