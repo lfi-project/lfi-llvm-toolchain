@@ -8,7 +8,7 @@
 set -ex
 
 ./build-lfi.sh $PWD/$1-lfi-clang $1
-LFIFLAGS="--sandbox=stores" ./build-lfi.sh $PWD/$1-lfi-stores-clang $1
+LFISTORES=1 ./build-lfi.sh $PWD/$1-lfi-stores-clang $1
 ./build-native.sh $PWD/$1-native-clang $1
 
 mkdir -p dist

@@ -46,5 +46,5 @@ Build native toolchain (for comparison)
 Build LFI toolchain with only sandboxing for stores:
 
 ```
-LFIFLAGS="--sandbox=stores" ./build-lfi.sh $PWD/aarch64-lfi-stores-clang aarch64
+LFISTORES=1 ./build-lfi.sh $PWD/aarch64-lfi-stores-clang aarch64
 ```
