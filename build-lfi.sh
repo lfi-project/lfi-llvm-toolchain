@@ -19,11 +19,7 @@ fi
 ./build-musl.sh $PREFIX
 ./build-libcxx.sh $PREFIX
 ./build-mimalloc.sh $PREFIX
-
-# build boxrt
-$PREFIX/bin/clang -c -fPIC boxrt/boxrt.c -o boxrt/boxrt.o
-$PREFIX/bin/llvm-ar rcs boxrt/libboxrt.a boxrt/boxrt.o
-cp boxrt/libboxrt.a $PREFIX/sysroot/usr/lib
+./build-boxrt.sh $PREFIX
 
 cp $(which lfi-rewrite) $PREFIX/lfi-bin
 cp $(which lfi-postlink) $PREFIX/lfi-bin
