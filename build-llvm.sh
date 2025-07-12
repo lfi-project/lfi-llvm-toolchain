@@ -47,9 +47,6 @@ mv $PREFIX/bin/lld $PREFIX/bin/lld.orig
 ./lld.gen > $PREFIX/bin/lld
 chmod +x $PREFIX/bin/lld
 
-rm -rf build-llvm-$ARCH
-mv build-llvm build-llvm-$ARCH
-
 mkdir -p $PREFIX/lfi-bin
 mkdir -p $PREFIX/lfi-clang
 cd $PREFIX/lfi-bin

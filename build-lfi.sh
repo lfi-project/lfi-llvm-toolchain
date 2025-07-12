@@ -20,6 +20,7 @@ fi
 ./build-libcxx.sh $PREFIX
 ./build-mimalloc.sh $PREFIX
 ./build-boxrt.sh $PREFIX
+./build-sanitizers.sh $PREFIX
 
 cp $(which lfi-rewrite) $PREFIX/lfi-bin
 cp $(which lfi-postlink) $PREFIX/lfi-bin

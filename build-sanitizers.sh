@@ -1,32 +1,14 @@
 #!/bin/sh
-
-# Usage: build-compiler-rt.sh PREFIX
+#
+# Usage: build-sanitizers.sh PREFIX
 
 set -ex
 
-LLVM_MAJOR=20
-
 PREFIX=$1
 
-# musl headers
-export CC=$PREFIX/bin/clang
-cd musl
-make clean
-./configure --prefix=$PREFIX/sysroot/usr --syslibdir=$PREFIX/sysroot/lib
-make install-headers
-cd ..
-
-# linux headers
-if [ "$MARCH" = "aarch64" ]
-then
-    LINUX_ARCH=arm64
-else
-    LINUX_ARCH=$MARCH
-fi
-
-make -C linux headers_install ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$PREFIX/sysroot/usr
-
-# compiler-rt
+# Rebuild compiler-rt with sanitizers now that libcxx has been built. Note: we
+# have disabled GWP_ASAN because it uses execinfo.h, which is not available
+# from Musl.
 rm -rf build-compiler-rt-$ARCH
 mkdir -p build-compiler-rt-$ARCH
 cd build-compiler-rt-$ARCH
@@ -43,10 +25,12 @@ cmake -G Ninja ../llvm-project/compiler-rt \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
     -DCOMPILER_RT_BUILD_MEMPROF=OFF \
     -DCOMPILER_RT_BUILD_PROFILE=OFF \
-    -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+    -DCOMPILER_RT_BUILD_SANITIZERS=ON \
     -DCOMPILER_RT_BUILD_XRAY=OFF \
     -DCOMPILER_RT_BUILD_ORC=OFF \
     -DCOMPILER_RT_BUILD_CTX_PROFILE=OFF \
+    -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
+    -DCOMPILER_RT_BUILD_GWP_ASAN=OFF \
     -DCMAKE_C_COMPILER_WORKS=ON \
     -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON \
     -DCMAKE_CXX_COMPILER_WORKS=ON \

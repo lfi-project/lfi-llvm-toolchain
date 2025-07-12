@@ -6,15 +6,6 @@ set -ex
 
 PREFIX=$1
 
-if [ "$MARCH" = "aarch64" ]
-then
-    LINUX_ARCH=arm64
-else
-    LINUX_ARCH=$MARCH
-fi
-
-make -C linux headers_install ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$PREFIX/sysroot/usr
-
 rm -rf build-libcxx-$ARCH
 mkdir -p build-libcxx-$ARCH
 cd build-libcxx-$ARCH

@@ -2,4 +2,4 @@
 
 set -ex
 
-rm -rf build-compiler-rt-* build-llvm-* build-libcxx-*
+rm -rf build-compiler-rt-* build-llvm build-llvm-* build-libcxx-*

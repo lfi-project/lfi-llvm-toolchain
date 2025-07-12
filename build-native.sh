@@ -14,3 +14,4 @@ export ARCH=$2-unknown
 ./build-musl.sh $PREFIX
 ./build-libcxx.sh $PREFIX
 ./build-mimalloc.sh $PREFIX
+./build-sanitizers.sh $PREFIX
