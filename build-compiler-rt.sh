@@ -20,6 +20,9 @@ cd ..
 if [ "$MARCH" = "aarch64" ]
 then
     LINUX_ARCH=arm64
+elif [ "$MARCH" = "riscv64" ]
+then
+    LINUX_ARCH=riscv
 else
     LINUX_ARCH=$MARCH
 fi

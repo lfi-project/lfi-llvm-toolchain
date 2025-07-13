@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Usage: build-lfi.sh PREFIX ARCH (aarch64 or x86_64)
+# Usage: build-lfi.sh PREFIX ARCH (aarch64 or x86_64 or riscv64)
 
 set -ex
 

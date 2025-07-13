@@ -24,7 +24,7 @@ cmake -G Ninja ../llvm-project/llvm \
     -DCMAKE_CXX_COMPILER=clang++ \
     -DLLVM_ENABLE_PROJECTS="lld;clang" \
     -DLLVM_ENABLE_ASSERTIONS=ON \
-    -DLLVM_TARGETS_TO_BUILD="X86;AArch64;WebAssembly" \
+    -DLLVM_TARGETS_TO_BUILD="X86;AArch64;RISCV;WebAssembly" \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$ARCH-linux-musl" \
     -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
     -DCMAKE_C_COMPILER_LAUNCHER=ccache \
