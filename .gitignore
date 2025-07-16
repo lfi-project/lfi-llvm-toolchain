@@ -8,6 +8,10 @@ musl
 llvm-project
 mimalloc
 linux
+lfi-runtime
+lfi-rewriter
+lfi-verifier
+*-lfi-tools
 aarch64-native-clang
 aarch64-lfi-*clang
 x86_64-native-*clang
