@@ -4,6 +4,12 @@
 ./download.sh
 ```
 
+Install dependencies (Ubuntu):
+
+```
+sudo apt install meson ninja-build build-essential git ccache clang lld llvm
+```
+
 Build the LFI tools (rewriter, verifier, runtime):
 
 ```
