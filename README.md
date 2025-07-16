@@ -1,20 +1,17 @@
-# Build LFI tools
-
-You will need to install the LFI rewriter tool, called `lfi-rewrite` and the post-linker called `lfi-postlink`.
+# Download sources
 
 ```
-git clone https://github.com/lfi-project/lfi-rewriter
-cd lfi-rewriter
-meson setup build
-cd build
-ninja
-ninja install
+./download.sh
 ```
 
-Make sure that these tools get installed somewhere on your `PATH`. When
-configuring meson you can optionally use `meson setup build --prefix=...` to
-give a custom prefix, or you can manually move `lfi-rewrite/lfi-rewrite` to
-your destination of choice after running `ninja`.
+Build the LFI tools (rewriter, verifier, runtime):
+
+```
+./build-lfi-tools.sh $PWD/lfi-tools aarch64 # (or x86_64)
+```
+
+Put `$PWD/lfi-tools/bin` on your `PATH` before advancing to the next step. In
+particular, the `lfi-rewrite` and `lfi-postlink` tools must be available.
 
 # Build LLVM Toolchain
 
@@ -24,12 +21,6 @@ to `ccache`).
 
 The builder will first compile LLVM, followed by the target runtime libraries:
 `compiler-rt`, `musl-libc`, `libc++`, `libc++abi`, and `libunwind`.
-
-Download the sources
-
-```
-./download.sh
-```
 
 Build LFI toolchain
 
