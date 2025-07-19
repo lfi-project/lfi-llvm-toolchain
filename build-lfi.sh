@@ -10,6 +10,8 @@ export MARCH=$2
 
 if [ "$LFISTORES" -eq 1 ]; then
     export ARCH=$2-lfi_stores
+elif [ "$LFIJUMPS" -eq 1 ]; then
+    export ARCH=$2-lfi_jumps
 else
     export ARCH=$2-lfi
 fi
