@@ -16,4 +16,4 @@ export ARCH=$2-unknown
 ./build-mimalloc.sh $PREFIX
 ./build-sanitizers.sh $PREFIX
 
-mv clang++.cfg $PREFIX/bin
+cp clang++.cfg $PREFIX/bin
