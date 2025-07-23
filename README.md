@@ -21,9 +21,8 @@ particular, the `lfi-rewrite` and `lfi-postlink` tools must be available.
 
 # Build LLVM Toolchain
 
-First make sure `ccache` is installed, it will make your build *much* faster,
-since the build requires compiling LLVM twice (the second time is faster thanks
-to `ccache`).
+First make sure `ccache` is installed, it will make your build *much* faster if
+you end up needing to rebuild.
 
 The builder will first compile LLVM, followed by the target runtime libraries:
 `compiler-rt`, `musl-libc`, `libc++`, `libc++abi`, and `libunwind`.
@@ -44,4 +43,11 @@ Build LFI toolchain with only sandboxing for stores:
 
 ```
 LFISTORES=1 ./build-lfi.sh $PWD/aarch64-lfi-stores-clang aarch64
+```
+
+Build LFI toolchain with only sandboxing for jumps (for use in conjunction with
+protection keys like Intel MPK):
+
+```
+LFIJUMPS=1 ./build-lfi.sh $PWD/aarch64-lfi-jumps-clang aarch64
 ```
