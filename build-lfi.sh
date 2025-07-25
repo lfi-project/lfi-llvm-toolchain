@@ -8,9 +8,9 @@ PREFIX=$1
 
 export MARCH=$2
 
-if [ "$LFISTORES" -eq 1 ]; then
+if [ -n "$LFISTORES" ]; then
     export ARCH=$2-lfi_stores
-elif [ "$LFIJUMPS" -eq 1 ]; then
+elif [ -n "$LFIJUMPS" ]; then
     export ARCH=$2-lfi_jumps
 else
     export ARCH=$2-lfi
