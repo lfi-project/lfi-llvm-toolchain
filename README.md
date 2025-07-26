@@ -7,7 +7,7 @@
 Install dependencies (Ubuntu):
 
 ```
-sudo apt install meson ninja-build build-essential git ccache clang lld llvm
+sudo apt install meson ninja-build build-essential git ccache clang lld llvm cmake golang-go rsync
 ```
 
 Build the LFI tools (rewriter, verifier, runtime):
