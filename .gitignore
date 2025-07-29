@@ -11,6 +11,7 @@ linux
 lfi-runtime
 lfi-rewriter
 lfi-verifier
+lfi-bind
 *-lfi-tools
 aarch64-native-clang
 aarch64-lfi-*clang

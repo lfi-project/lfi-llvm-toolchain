@@ -7,7 +7,7 @@ MARCH=$2
 
 cd lfi-runtime
 rm -rf build
-meson setup build --cross-file toolchains/$MARCH-linux-clang.meson --libdir=lib --prefix=$PREFIX
+meson setup build --cross-file toolchains/$MARCH-linux-clang.meson --libdir=lib --prefix=$PREFIX -Dstatic_lfi_run=true
 cd build
 ninja install
 cd ../..
