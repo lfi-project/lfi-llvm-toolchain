@@ -19,14 +19,19 @@ void *
 _lfi_thread_create(void)
 {
     pthread_t *t = malloc(sizeof(pthread_t));
-    pthread_create(t, NULL, &lfi_pause, NULL);
+    pthread_attr_t attr;
+    pthread_attr_init(&attr);
+    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+    pthread_create(t, &attr, &lfi_pause, NULL);
+    pthread_attr_destroy(&attr);
     return t;
 }
 
 void
 _lfi_thread_destroy(void *arg)
 {
-    free((pthread_t *) arg);
+    (void) arg; // arg is pthread_t *
+    pthread_exit(NULL);
 }
 
 int
@@ -71,6 +76,27 @@ _lfi_free(void *ptr)
     free(ptr);
 }
 
+void
+_lfi_ret(void)
+{
+    // We avoid using actual assembly instructions to prevent them from being
+    // rewritten.
+    asm volatile (
+#if defined(__aarch64__)
+        ".byte 0x7e, 0x0f, 0x40, 0xf9" // ldr x30, [x27, #24]
+        ".byte 0xc0, 0x03, 0x3f, 0xd6" // blr x30
+#elif defined(__x86_64__)
+        ".byte 0x4c, 0x8d, 0x1d, 0x04, 0x00, 0x00, 0x00" // lea 0x4(%rip), %r11
+        ".byte 0x41, 0xff, 0x66, 0x18"                   // jmp *0x18(%r14)
+#elif defined(__riscv) && (__riscv_xlen == 64)
+        ".byte 0x83, 0xb0, 0x8a, 0x01" // la ra, 24(x21)
+        ".byte 0xe7, 0x80, 0x00, 0x00" // jalr ra
+#else
+#error "invalid architecture"
+#endif
+    );
+}
+
 void *symbols[] = {
     &_lfi_thread_create,
     &_lfi_thread_destroy,
@@ -81,6 +107,7 @@ void *symbols[] = {
     &_lfi_realloc,
     &_lfi_calloc,
     &_lfi_free,
+    &_lfi_ret,
 };
 
 int

@@ -20,3 +20,5 @@ riscv64-native-*clang
 riscv64-lfi-*clang
 *.tar.gz
 *.a
+.cache
+host-x86_64.sh

@@ -12,6 +12,10 @@ if [ ! -d lfi-verifier ]; then
     git clone https://github.com/lfi-project/lfi-verifier
 fi
 
+if [ ! -d lfi-bind ]; then
+    git clone https://github.com/lfi-project/lfi-bind
+fi
+
 if [ ! -d llvm-project ]; then
     git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-external-20.1.7
 fi

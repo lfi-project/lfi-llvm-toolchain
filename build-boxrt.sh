@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Usage: build-mimalloc.sh PREFIX
+# Usage: build-boxrt.sh PREFIX
 
 set -ex
 
@@ -12,3 +12,5 @@ cd boxrt
 $PREFIX/bin/clang -c -fPIC boxrt.c -o boxrt.o -O2
 $PREFIX/bin/clang boxrt.c -o $PREFIX/sysroot/usr/lib/boxrt.lfi -O2 -Wl,--export-dynamic
 $PREFIX/bin/llvm-ar rcs $PREFIX/sysroot/usr/lib/libboxrt.a boxrt.o
+$PREFIX/bin/clang -target $MARCH-linux boxrt_callbacks.S -o $PREFIX/sysroot/usr/lib/boxrt_callbacks.so -shared -fuse-ld=lld
+$PREFIX/bin/llvm-objcopy -O binary --only-section=.text $PREFIX/sysroot/usr/lib/boxrt_callbacks.so $PREFIX/sysroot/usr/lib/boxrt_callbacks.bin
