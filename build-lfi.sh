@@ -16,11 +16,11 @@ fi
 
 ./build-llvm.sh $PREFIX
 ./build-compiler-rt.sh $PREFIX
+cp $ARCH-linux-musl.cfg $PREFIX/bin
 ./build-musl.sh $PREFIX
 ./build-libcxx.sh $PREFIX
 ./build-mimalloc.sh $PREFIX
 ./build-boxrt.sh $PREFIX
-./build-sanitizers.sh $PREFIX
 
 cp $(which lfi-rewrite) $PREFIX/lfi-bin
 cp $(which lfi-postlink) $PREFIX/lfi-bin
