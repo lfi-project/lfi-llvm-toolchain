@@ -24,9 +24,9 @@ cp $ARCH-linux-musl.cfg $PREFIX/bin
 
 cp $(which lfi-rewrite) $PREFIX/lfi-bin
 cp $(which lfi-postlink) $PREFIX/lfi-bin
-cp $(which lfi-verify) $PREFIX/lfi-bin
+# cp $(which lfi-verify) $PREFIX/lfi-bin
 
-if [ `uname -m` = "$MARCH" ];
-then
-    cp $(which lfi-run) $PREFIX/lfi-bin
-fi
+# if [ `uname -m` = "$MARCH" ];
+# then
+#     cp $(which lfi-run) $PREFIX/lfi-bin
+# fi
