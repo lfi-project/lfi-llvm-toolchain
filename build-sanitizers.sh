@@ -4,6 +4,8 @@
 
 set -ex
 
+LLVM_MAJOR=20
+
 PREFIX=$1
 
 # Rebuild compiler-rt with sanitizers now that libcxx has been built. Note: we
