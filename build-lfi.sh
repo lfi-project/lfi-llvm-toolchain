@@ -9,11 +9,11 @@ PREFIX=$1
 export MARCH=$2
 
 if [ -n "$LFISTORES" ]; then
-    export ARCH=$2-lfi_stores
+    export ARCH=$2_lfi_stores
 elif [ -n "$LFIJUMPS" ]; then
-    export ARCH=$2-lfi_jumps
+    export ARCH=$2_lfi_jumps
 else
-    export ARCH=$2-lfi
+    export ARCH=$2_lfi
 fi
 
 ./build-llvm.sh $PREFIX
