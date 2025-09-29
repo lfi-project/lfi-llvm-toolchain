@@ -19,13 +19,6 @@ cd build
 ninja install
 cd ../..
 
-cd lfi-rewriter
-rm -rf build
-meson setup build --libdir=lib --prefix=$PREFIX
-cd build
-ninja install
-cd ../..
-
 cd lfi-bind
 go build -o $PREFIX/bin
 cd ..
