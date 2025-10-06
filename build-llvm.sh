@@ -16,8 +16,8 @@ mkdir -p $PREFIX/sysroot/usr/include
 # Include this if you want LLVMgold.so
 # -DLLVM_BINUTILS_INCDIR=/usr/include \
 
-mkdir -p build
-cd build
+mkdir -p build-llvm
+cd build-llvm
 cmake -G Ninja ../llvm-project/llvm \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER=clang \
@@ -43,13 +43,9 @@ ninja
 ninja install/strip
 cd ..
 
-if [ -n "$LFISTORES" ]; then
-    cp lfi-stores.cfg $PREFIX/bin/clang.cfg
-    cp lfi-stores.cfg $PREFIX/bin/clang++.cfg
-elif [ -n "$LFIJUMPS" ]; then
-    cp lfi-jumps.cfg $PREFIX/bin/clang.cfg
-    cp lfi-jumps.cfg $PREFIX/bin/clang++.cfg
-fi
+mv $PREFIX/bin/lld $PREFIX/bin/lld.orig
+./lld.gen > $PREFIX/bin/lld
+chmod +x $PREFIX/bin/lld
 
 mkdir -p $PREFIX/lfi-bin
 mkdir -p $PREFIX/lfi-clang
