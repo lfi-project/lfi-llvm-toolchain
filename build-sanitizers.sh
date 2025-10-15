@@ -24,6 +24,8 @@ cmake -G Ninja ../llvm-project/compiler-rt \
     -DCMAKE_C_COMPILER_TARGET="$ARCH-linux-musl" \
     -DCMAKE_ASM_COMPILER_TARGET="$ARCH-linux-musl" \
     -DCOMPILER_RT_BUILD_BUILTINS=ON \
+    -DCOMPILER_RT_SANITIZERS_TO_BUILD="safestack" \
+    -DSAFESTACK_LFI_CFLAGS="-ftls-model=local-exec" \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
     -DCOMPILER_RT_BUILD_MEMPROF=OFF \
     -DCOMPILER_RT_BUILD_PROFILE=OFF \
