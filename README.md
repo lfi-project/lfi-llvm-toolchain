@@ -1,3 +1,10 @@
+# Check out branch
+
+Choose the branch you want:
+
+* `master`: external rewriter on LLVM 20.1.7 (requires `lfi-rewriter` and `lfi-postlink` for x86).
+* `llvm-integrated-main`: integrated rewriter on a recent version of LLVM 22-dev.
+
 # Download sources
 
 ```
