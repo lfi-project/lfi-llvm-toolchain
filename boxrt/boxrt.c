@@ -98,10 +98,14 @@ _lfi_ret(void)
     );
 }
 
-int
-_lfi_setjmp(jmp_buf env)
+void
+_lfi_setjmp(jmp_buf env, void *host_env, void (*callback)(void *, int))
 {
-    return setjmp(env);
+    int r = setjmp(env);
+    if (r != 0) {
+        callback(host_env, r);
+        __builtin_unreachable();
+    }
 }
 
 void *symbols[] = {
