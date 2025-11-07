@@ -7,7 +7,7 @@ set -e
 
 PREFIX=$1
 
-DEFINE_FLAGS="-DLFI_DEFAULT_FLAGS='\"$LFIFLAGS\"'"
+DEFINE_FLAGS="-DLFI_DEFAULT_FLAGS='\"$LFI_FLAGS\"'"
 
 mkdir -p $PREFIX/sysroot/usr/lib
 mkdir -p $PREFIX/sysroot/lib
@@ -49,7 +49,14 @@ if [ -n "$LFISTORES" ]; then
 elif [ -n "$LFIJUMPS" ]; then
     cp lfi-jumps.cfg $PREFIX/bin/clang.cfg
     cp lfi-jumps.cfg $PREFIX/bin/clang++.cfg
+else
+    cp lfi-full.cfg $PREFIX/bin/clang.cfg
+    cp lfi-full.cfg $PREFIX/bin/clang++.cfg
 fi
+
+mv $PREFIX/bin/lld $PREFIX/bin/lld.orig
+./lld.gen > $PREFIX/bin/lld
+chmod +x $PREFIX/bin/lld
 
 mkdir -p $PREFIX/lfi-bin
 mkdir -p $PREFIX/lfi-clang

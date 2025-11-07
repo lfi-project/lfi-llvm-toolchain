@@ -17,7 +17,7 @@ if [ ! -d lfi-bind ]; then
 fi
 
 if [ ! -d llvm-project ]; then
-    git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-integrated-full-main
+    git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-external-prefixpad
 fi
 
 if [ ! -d musl ]; then
