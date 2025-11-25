@@ -9,6 +9,12 @@ PREFIX=$1
 
 DEFINE_FLAGS="-DLFI_DEFAULT_FLAGS='\"$LFI_FLAGS\"'"
 
+if [ -n "$LFI_UNALIGN" ]; then
+  DEFINE_FLAGS="$DEFINE_FLAGS -DLFI_UNALIGN"
+elif [ -n "$LFI_PREFIXPAD" ]; then
+  DEFINE_FLAGS="$DEFINE_FLAGS -DLFI_PREFIXPAD"
+fi
+
 mkdir -p $PREFIX/sysroot/usr/lib
 mkdir -p $PREFIX/sysroot/lib
 mkdir -p $PREFIX/sysroot/usr/include
