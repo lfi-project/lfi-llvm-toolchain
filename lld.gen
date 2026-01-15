@@ -45,9 +45,3 @@ done
 
 (exec -a \$0 \$DIR/lld.orig \$ARGS --no-dependent-libraries)
 EOM
-
-if [[ $ARCH == *"lfi"* ]]; then
-    cat << EOM
-lfi-postlink -a $LFIARCH $(lfi-rewrite -a $LFIARCH --flags=postlink $LFIFLAGS) \$OUTPUT
-EOM
-fi

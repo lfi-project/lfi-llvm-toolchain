@@ -4,6 +4,7 @@ build-compiler-rt-*
 build-libcxx-*
 build-llvm-*
 build-llvm
+build
 musl
 llvm-project
 mimalloc

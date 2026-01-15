@@ -17,7 +17,7 @@ if [ ! -d lfi-bind ]; then
 fi
 
 if [ ! -d llvm-project ]; then
-    git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-external-20.1.7
+    git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-integrated-full-main
 fi
 
 if [ ! -d musl ]; then

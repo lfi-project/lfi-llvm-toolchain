@@ -10,6 +10,8 @@
 
 .text
 
+.no_expand
+
 #define LFI_CALLBACKS 4096
 
 #if defined(__aarch64__)

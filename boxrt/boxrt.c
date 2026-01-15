@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <dlfcn.h>
+#include <setjmp.h>
 
 #define LFI_SYS_pause 1024
 
@@ -97,6 +98,16 @@ _lfi_ret(void)
     );
 }
 
+void
+_lfi_setjmp(jmp_buf env, void *host_env, void (*callback)(void *, int))
+{
+    int r = setjmp(env);
+    if (r != 0) {
+        callback(host_env, r);
+        __builtin_unreachable();
+    }
+}
+
 void *symbols[] = {
     &_lfi_thread_create,
     &_lfi_thread_destroy,
@@ -108,6 +119,7 @@ void *symbols[] = {
     &_lfi_calloc,
     &_lfi_free,
     &_lfi_ret,
+    &_lfi_setjmp,
 };
 
 int

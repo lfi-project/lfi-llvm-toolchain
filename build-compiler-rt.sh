@@ -4,7 +4,7 @@
 
 set -ex
 
-LLVM_MAJOR=20
+LLVM_MAJOR=22
 
 PREFIX=$1
 
@@ -53,6 +53,8 @@ cmake -G Ninja ../llvm-project/compiler-rt \
     -DCMAKE_C_COMPILER_WORKS=ON \
     -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON \
     -DCMAKE_CXX_COMPILER_WORKS=ON \
+    -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$PREFIX/lib/clang/$LLVM_MAJOR
 ninja
 ninja install

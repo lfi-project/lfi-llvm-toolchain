@@ -7,14 +7,7 @@ set -ex
 PREFIX=$1
 
 export MARCH=$2
-
-if [ -n "$LFISTORES" ]; then
-    export ARCH=$2-lfi_stores
-elif [ -n "$LFIJUMPS" ]; then
-    export ARCH=$2-lfi_jumps
-else
-    export ARCH=$2-lfi
-fi
+export ARCH=$2_lfi
 
 ./build-llvm.sh $PREFIX
 ./build-compiler-rt.sh $PREFIX
