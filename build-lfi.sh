@@ -16,8 +16,3 @@ export ARCH=$2_lfi
 ./build-mimalloc.sh $PREFIX
 ./build-boxrt.sh $PREFIX
 ./build-sanitizers.sh $PREFIX
-
-cp $(which lfi-rewrite) $PREFIX/lfi-bin
-cp $(which lfi-postlink) $PREFIX/lfi-bin
-cp $(which lfi-verify) $PREFIX/lfi-bin
-cp $(which lfi-run) $PREFIX/lfi-bin
