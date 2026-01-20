@@ -17,7 +17,7 @@ if [ ! -d lfi-bind ]; then
 fi
 
 if [ ! -d llvm-project ]; then
-    git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-integrated-full-main
+    git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-patchset/aarch64-pr-3-full
 fi
 
 if [ ! -d musl ]; then
