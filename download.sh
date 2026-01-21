@@ -1,21 +1,5 @@
 #!/bin/sh
 
-if [ ! -d lfi-runtime ]; then
-    git clone https://github.com/lfi-project/lfi-runtime
-fi
-
-if [ ! -d lfi-rewriter ]; then
-    git clone https://github.com/lfi-project/lfi-rewriter
-fi
-
-if [ ! -d lfi-verifier ]; then
-    git clone https://github.com/lfi-project/lfi-verifier
-fi
-
-if [ ! -d lfi-bind ]; then
-    git clone https://github.com/lfi-project/lfi-bind
-fi
-
 if [ ! -d llvm-project ]; then
     git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-patchset/aarch64-pr-3-full
 fi
