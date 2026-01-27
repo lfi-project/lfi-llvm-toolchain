@@ -19,19 +19,20 @@ lfi_pause(void *arg)
 void *
 _lfi_thread_create(void)
 {
-    pthread_t *t = malloc(sizeof(pthread_t));
+    pthread_t t;
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-    pthread_create(t, &attr, &lfi_pause, NULL);
+    if (pthread_create(&t, &attr, &lfi_pause, NULL) != 0)
+      abort();
     pthread_attr_destroy(&attr);
-    return t;
+    return NULL;
 }
 
 void
 _lfi_thread_destroy(void *arg)
 {
-    (void) arg; // arg is pthread_t *
+    (void) arg;
     pthread_exit(NULL);
 }
 
