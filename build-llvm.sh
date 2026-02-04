@@ -49,6 +49,9 @@ if [ -n "$LFISTORES" ]; then
 elif [ -n "$LFIJUMPS" ]; then
     cp lfi-jumps.cfg $PREFIX/bin/clang.cfg
     cp lfi-jumps.cfg $PREFIX/bin/clang++.cfg
+elif [ -n "$LFISAFESTACK" ]; then
+    cp lfi-safestack.cfg $PREFIX/bin/clang.cfg
+    cp lfi-safestack.cfg $PREFIX/bin/clang++.cfg
 fi
 
 mkdir -p $PREFIX/lfi-bin
