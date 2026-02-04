@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ ! -d llvm-project ]; then
-    git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-patchset/aarch64-pr-3-full
+    git clone https://github.com/lfi-project/llvm-project --depth 1 -b x86-safestack
 fi
 
 if [ ! -d musl ]; then
