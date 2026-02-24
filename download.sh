@@ -5,7 +5,7 @@ if [ ! -d llvm-project ]; then
 fi
 
 if [ ! -d musl ]; then
-    git clone https://github.com/zyedidia/musl -b lfi-1.2.5
+    git clone https://github.com/t-noh/musl -b x86-safestack
 fi
 
 if [ ! -d linux ]; then
@@ -14,4 +14,8 @@ fi
 
 if [ ! -d mimalloc ]; then
     git clone https://github.com/microsoft/mimalloc -b v3.0.1
+fi
+
+if [ ! -d lfi-runtime ]; then
+    git clone https://github.com/lfi-project/lfi-runtime -b x86-safestack
 fi
