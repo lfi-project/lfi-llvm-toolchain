@@ -13,6 +13,8 @@ cmake -G Ninja ../llvm-project/runtimes \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER=$PREFIX/bin/clang \
     -DCMAKE_CXX_COMPILER=$PREFIX/bin/clang \
+    -DCMAKE_C_FLAGS="-fomit-frame-pointer" \
+    -DCMAKE_CXX_FLAGS="-fomit-frame-pointer" \
     -DLIBCXX_HAS_MUSL_LIBC=YES \
     -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
     -DCMAKE_INSTALL_PREFIX=$PREFIX/sysroot/usr \
