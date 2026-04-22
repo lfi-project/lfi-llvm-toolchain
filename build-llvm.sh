@@ -7,8 +7,6 @@ set -e
 
 PREFIX=$1
 
-DEFINE_FLAGS="-DLFI_DEFAULT_FLAGS='\"$LFIFLAGS\"'"
-
 mkdir -p $PREFIX/sysroot/usr/lib
 mkdir -p $PREFIX/sysroot/lib
 mkdir -p $PREFIX/sysroot/usr/include
@@ -24,7 +22,7 @@ cmake -G Ninja ../llvm-project/llvm \
     -DCMAKE_CXX_COMPILER=clang++ \
     -DLLVM_ENABLE_PROJECTS="lld;clang" \
     -DLLVM_ENABLE_ASSERTIONS=ON \
-    -DLLVM_TARGETS_TO_BUILD="X86;AArch64;RISCV;WebAssembly" \
+    -DLLVM_TARGETS_TO_BUILD="X86;AArch64;RISCV" \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$ARCH-linux-musl" \
     -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
     -DCMAKE_C_COMPILER_LAUNCHER=ccache \
@@ -36,26 +34,13 @@ cmake -G Ninja ../llvm-project/llvm \
     -DCLANG_DEFAULT_UNWINDLIB="libunwind" \
     -DCLANG_DEFAULT_LINKER="lld" \
     -DCLANG_DEFAULT_OBJCOPY="llvm-objcopy" \
-    -DCMAKE_C_FLAGS="$DEFINE_FLAGS" \
-    -DCMAKE_CXX_FLAGS="$DEFINE_FLAGS" \
     -DDEFAULT_SYSROOT=../sysroot
 ninja
 ninja install/strip
 cd ..
 
-if [ -n "$LFISTORES" ]; then
-    cp lfi-stores.cfg $PREFIX/bin/clang.cfg
-    cp lfi-stores.cfg $PREFIX/bin/clang++.cfg
-elif [ -n "$LFIJUMPS" ]; then
-    cp lfi-jumps.cfg $PREFIX/bin/clang.cfg
-    cp lfi-jumps.cfg $PREFIX/bin/clang++.cfg
-fi
-
 mkdir -p $PREFIX/lfi-bin
 mkdir -p $PREFIX/lfi-clang
-cd $PREFIX/lfi-bin
-ln -sf ../bin/clang $ARCH-linux-musl-clang
-ln -sf ../bin/clang++ $ARCH-linux-musl-clang++
 cd $PREFIX/lfi-clang
 ln -sf ../bin/clang $ARCH-linux-musl-clang
 ln -sf ../bin/clang++ $ARCH-linux-musl-clang++

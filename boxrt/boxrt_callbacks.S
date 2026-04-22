@@ -10,7 +10,7 @@
 
 .text
 
-.no_expand
+.lfi_rewrite_disable
 
 #define LFI_CALLBACKS 4096
 

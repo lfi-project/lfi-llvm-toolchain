@@ -1,23 +1,7 @@
 #!/bin/sh
 
-if [ ! -d lfi-runtime ]; then
-    git clone https://github.com/lfi-project/lfi-runtime
-fi
-
-if [ ! -d lfi-rewriter ]; then
-    git clone https://github.com/lfi-project/lfi-rewriter
-fi
-
-if [ ! -d lfi-verifier ]; then
-    git clone https://github.com/lfi-project/lfi-verifier
-fi
-
-if [ ! -d lfi-bind ]; then
-    git clone https://github.com/lfi-project/lfi-bind
-fi
-
 if [ ! -d llvm-project ]; then
-    git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi-integrated-full-main
+    git clone https://github.com/llvm/llvm-project --depth 1
 fi
 
 if [ ! -d musl ]; then
