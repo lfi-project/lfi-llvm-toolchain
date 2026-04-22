@@ -1,9 +1,11 @@
-# Check out branch
+# LFI LLVM Toolchain
 
-Choose the branch you want:
+This is the LFI toolchain builder. It will build by default from upstream LLVM,
+which contains in-development support for LFI.
 
-* `master`: external rewriter on LLVM 20.1.7 (requires `lfi-rewriter` and `lfi-postlink` for x86).
-* `llvm-integrated-main`: integrated rewriter on a recent version of LLVM 22-dev.
+Current status: `aarch64_lfi` generates programs that can run within the LFI
+runtime (syscalls and TP accesses rewritten), but does not have rewrites for
+sandboxing control flow or memory accesses.
 
 # Download sources
 
@@ -16,15 +18,6 @@ Install dependencies (Ubuntu):
 ```
 sudo apt install meson ninja-build build-essential git ccache clang lld llvm cmake golang-go rsync
 ```
-
-Build the LFI tools (rewriter, verifier, runtime):
-
-```
-./build-lfi-tools.sh $PWD/lfi-tools aarch64 # (or x86_64)
-```
-
-Put `$PWD/lfi-tools/bin` on your `PATH` before advancing to the next step. In
-particular, the `lfi-rewrite` and `lfi-postlink` tools must be available.
 
 # Build LLVM Toolchain
 
@@ -44,17 +37,4 @@ Build native toolchain (for comparison)
 
 ```
 ./build-native.sh $PWD/aarch64-native-clang aarch64
-```
-
-Build LFI toolchain with only sandboxing for stores:
-
-```
-LFISTORES=1 ./build-lfi.sh $PWD/aarch64-lfi-stores-clang aarch64
-```
-
-Build LFI toolchain with only sandboxing for jumps (for use in conjunction with
-protection keys like Intel MPK):
-
-```
-LFIJUMPS=1 ./build-lfi.sh $PWD/aarch64-lfi-jumps-clang aarch64
 ```
