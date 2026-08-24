@@ -4,9 +4,9 @@
 
 set -ex
 
-LLVM_MAJOR=24
-
 PREFIX=$1
+
+RESOURCE_DIR=$($PREFIX/bin/clang -print-resource-dir)
 
 # musl headers
 export CC=$PREFIX/bin/clang
@@ -55,6 +55,6 @@ cmake -G Ninja ../llvm-project/compiler-rt \
     -DCMAKE_CXX_COMPILER_WORKS=ON \
     -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$PREFIX/lib/clang/$LLVM_MAJOR
+    -DCMAKE_INSTALL_PREFIX=$RESOURCE_DIR
 ninja
 ninja install
