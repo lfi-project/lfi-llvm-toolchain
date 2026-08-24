@@ -38,3 +38,24 @@ Build native toolchain (for comparison)
 ```
 ./build-native.sh $PWD/aarch64-native-clang aarch64
 ```
+
+# Configurations
+
+The `cfg` directory contains configurations: `clang.cfg`/`clang++.cfg`
+[configuration files](https://clang.llvm.org/docs/UsersManual.html#configuration-files)
+that are installed into the toolchain's `bin` directory so that Clang applies
+them by default. The configuration is installed before the runtime libraries
+are built, so it applies to them as well.
+
+Select a configuration with `--cfg` (the default is `lfi/rw` for
+`build-lfi.sh` and `native` for `build-native.sh`):
+
+```
+./build-lfi.sh --cfg=lfi/wo $PWD/aarch64-lfi-clang aarch64
+```
+
+Available LFI configurations:
+
+* `lfi/rw` (default): sandbox reads and writes
+* `lfi/wo`: sandbox writes only
+* `lfi/jo`: sandbox jumps only (reads and writes are not sandboxed)

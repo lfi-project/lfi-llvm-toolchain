@@ -1,8 +1,30 @@
 #!/bin/sh
 #
-# Usage: build-native.sh PREFIX ARCH (aarch64 or x86_64)
+# Usage: build-native.sh [--cfg=CONFIG] PREFIX ARCH (aarch64 or x86_64)
+#
+# CONFIG selects the clang.cfg/clang++.cfg files from cfg/CONFIG that are
+# installed into PREFIX/bin. Default: native.
 
 set -ex
+
+CFG=native
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+    --cfg=*)
+        CFG=${1#--cfg=}
+        shift
+        ;;
+    *)
+        break
+        ;;
+    esac
+done
+
+if [ ! -f "cfg/$CFG/clang.cfg" ] || [ ! -f "cfg/$CFG/clang++.cfg" ]; then
+    echo "no such config: cfg/$CFG" >&2
+    exit 1
+fi
 
 PREFIX=$1
 
@@ -10,10 +32,11 @@ export MARCH=$2
 export ARCH=$2-unknown
 
 ./build-llvm.sh $PREFIX
+
+# Install the config before the runtime libraries so they are built with it.
+cp "cfg/$CFG/clang.cfg" "cfg/$CFG/clang++.cfg" $PREFIX/bin
+
 ./build-compiler-rt.sh $PREFIX
 ./build-musl.sh $PREFIX
 ./build-libcxx.sh $PREFIX
 ./build-mimalloc.sh $PREFIX
-./build-sanitizers.sh $PREFIX
-
-cp clang++.cfg $PREFIX/bin
