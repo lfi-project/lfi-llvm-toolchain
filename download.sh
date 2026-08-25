@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ ! -d llvm-project ]; then
-    git clone https://github.com/llvm/llvm-project --depth 1
+    git clone https://github.com/lfi-project/llvm-project --depth 1 -b lfi/large-sandbox
 fi
 
 if [ ! -d musl ]; then
