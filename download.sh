@@ -5,7 +5,10 @@ if [ ! -d llvm-project ]; then
 fi
 
 if [ ! -d musl ]; then
-    git clone https://github.com/zyedidia/musl -b lfi-1.2.5
+    git clone https://github.com/zyedidia/musl -b lfi-1.2.5 && \
+    cd musl && \
+    git apply ../patches/musl-longjmp-x24.patch && \
+    cd ../
 fi
 
 if [ ! -d linux ]; then

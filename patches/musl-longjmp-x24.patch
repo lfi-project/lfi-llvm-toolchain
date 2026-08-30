@@ -1,0 +1,18 @@
+diff --git a/src/setjmp/aarch64/longjmp.S b/src/setjmp/aarch64/longjmp.S
+index 76dc0c8c..62dba8bb 100644
+--- a/src/setjmp/aarch64/longjmp.S
++++ b/src/setjmp/aarch64/longjmp.S
+@@ -9,8 +9,13 @@ longjmp:
+ 	ldp x19, x20, [x0,#0]
+ 	ldp x21, x22, [x0,#16]
+ #ifdef __LFI__
++#ifdef __LFI_LARGE_SANDBOX__
++	// In large-sandbox mode x24 is also reserved (the offset register).
++	ldr x23, [x0,#32]
++#else
+ 	ldp x23, x24, [x0,#32]
+ #endif
++#endif
+ #ifndef __LFI__
+ 	ldp x23, x24, [x0,#32]
+ 	ldp x25, x26, [x0,#48]
