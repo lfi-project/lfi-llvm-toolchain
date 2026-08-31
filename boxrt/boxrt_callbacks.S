@@ -21,7 +21,7 @@ _lfi_cb_code:
 .set i, 0
 .rept LFI_CALLBACKS
     bti jc
-    ldr x16, .lfi_cb_data+(16*i)
+    ldr x27, .lfi_cb_data+(16*i)
     ldr x28, .lfi_cb_data+(16*i)+8
     blr x28
     .set i, i+1
